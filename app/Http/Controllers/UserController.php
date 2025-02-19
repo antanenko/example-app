@@ -26,14 +26,12 @@ class UserController extends Controller
 
     public function review($id)
     {
-        //dd($id);
-
         $rev = ReviewModel::find(($id));
 
-        return view('user.review')->with('subject',$rev->subject)->with('textreview',$rev->message);
-        
-
-    }
+        $subject = $rev->subject;
+        $textreview = $rev->message;
+        return view('user.review',compact('subject','textreview'));
+     }
 
     public function create()
     {

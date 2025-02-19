@@ -5,9 +5,6 @@
 @section('content')
     <h1 class="h2">Review page</h1>
 
-    
-
-    
     <hr>
     
         <div>
@@ -16,7 +13,6 @@
             <p> {{ $textreview }}</p>
             
         </div>
-
         <hr>
         <a href="{{ route('home') }}">Home</a>     
 

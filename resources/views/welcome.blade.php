@@ -14,7 +14,7 @@
             
             <a href="review/{{ $el->id }}">{{ $el->subject }}</a>  
             <b> {{ $el->created_at }} Author: {{ $el->email }}</b>
-            <p> {{ $el->message }}</p>
+            
             <hr>
         </div>
     @endforeach
