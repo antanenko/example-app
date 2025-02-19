@@ -11,7 +11,7 @@ Route::get("/", [UserController::class,'index'])->name('home');
 
 
 Route::get('/register', function () {
-    return 'Hello World';
+    return 'Hello World 22';
 });
 
 Route::get('send',[UserController::class, 'send'])->name('send');
