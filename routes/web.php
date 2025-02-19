@@ -11,10 +11,12 @@ Route::get("/", [UserController::class,'index'])->name('home');
 
 
 Route::get('/register', function () {
-    return 'Hello World 22';
+    return 'Hello World';
 });
 
 Route::get('send',[UserController::class, 'send'])->name('send');
+
+Route::get('review/{id}',[UserController::class,'review'])->name('review');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

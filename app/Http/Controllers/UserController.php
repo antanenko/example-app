@@ -24,6 +24,17 @@ class UserController extends Controller
         return view('welcome',[ 'num_review'=>$cnt,'all_review'=>$review->all() ]);
     }
 
+    public function review($id)
+    {
+        //dd($id);
+
+        $rev = ReviewModel::find(($id));
+
+        return view('user.review')->with('subject',$rev->subject)->with('textreview',$rev->message);
+        
+
+    }
+
     public function create()
     {
         return view('user.create');
