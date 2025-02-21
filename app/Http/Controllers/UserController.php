@@ -31,7 +31,17 @@ class UserController extends Controller
 
         $subject = $rev->subject;
         $textreview = $rev->message;
-        return view('user.review',compact('subject','textreview'));
+
+
+        $revimg = Reviewfiles::where('review_id', '=', $rev->id)->first();
+
+        $filePath = '';
+        if ($revimg) {
+            $filePath = $revimg->filePath;
+
+        }
+
+        return view('user.review',compact('subject','textreview','filePath'));
      }
 
     public function create()
@@ -57,8 +67,6 @@ class UserController extends Controller
         $review->email = Auth::user()->email;
         $review->save();
 
-        
- 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
@@ -74,11 +82,8 @@ class UserController extends Controller
             $reviewfile->filePath = $filePath;
 
             $reviewfile->save();
-
-
         }    
 
-     
         return redirect()->route('dashboard');
     }
 

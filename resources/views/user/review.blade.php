@@ -11,7 +11,10 @@
                     
             <b> {{ $subject }}</b>
             <p> {{ $textreview }}</p>
-            
+
+            <img src="/storage/{{ $filePath }}" class="img-thumbnail" alt="...">
+
+                      
         </div>
         <hr>
         <a href="{{ route('home') }}">Home</a>     
