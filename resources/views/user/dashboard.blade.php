@@ -6,7 +6,7 @@
     <h1 class="h2">Dashboard page</h1>
 
     <div class="mb-3">
-    <form method="post" action="dashboard/add_review">
+    <form method="post" enctype="multipart/form-data" action="dashboard/add_review">
             @csrf
         
             <label for="exampleFormControlInput1" class="form-label">Subject</label>
@@ -15,6 +15,12 @@
         
             <label for="exampleFormControlTextarea1" class="form-label">Text of message</label>
             <textarea class="form-control" name="message" id="message" rows="8" placeholder="input message"></textarea> 
+
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                <input type="file" class="form-control" id="file" name="file">
+            </div>
+            
             <hr>
 
         <button type="submit" class="btn btn-success">Send</button>

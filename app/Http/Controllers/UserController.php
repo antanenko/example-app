@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reviewfiles;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ReviewModel;
@@ -40,10 +41,13 @@ class UserController extends Controller
 
     public function add_review(Request $request)
     {
+        
         $valid = $request->validate([
             'subject' => 'required|max:255',
             'message' => 'required',
+            'file' => 'required|file|mimes:jpg|max:1024',
         ]);
+
 
         $review = new ReviewModel();
 
@@ -52,6 +56,28 @@ class UserController extends Controller
         
         $review->email = Auth::user()->email;
         $review->save();
+
+        
+ 
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $filePath = $file->storeAs('uploads', $fileName,'public');
+
+        
+            $reviewfile = new Reviewfiles();
+
+            $reviewfile->user_id = Auth::user()->id;
+            $reviewfile->review_id = $review->id;
+            $reviewfile->filename = $fileName;
+            $reviewfile->filePath = $filePath;
+
+            $reviewfile->save();
+
+
+        }    
+
      
         return redirect()->route('dashboard');
     }
