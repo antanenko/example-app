@@ -25,6 +25,44 @@ class UserController extends Controller
         return view('welcome',[ 'num_review'=>$cnt,'all_review'=>$review->all() ]);
     }
 
+    public function editreviewUpdate(Request $request)
+    {
+        $valid = $request->validate([
+            'subject' => 'required|max:255',
+            'message' => 'required',
+           // 'file' => 'required|file|mimes:jpg|max:1024',
+        ]);
+
+        $review = new ReviewModel();
+
+        $id_review = $request->id_review;
+
+        $review = ReviewModel::find(($id_review));
+
+        $review->subject = $request->input('subject');
+        $review->message = $request->input('message');
+        $review->email = Auth::user()->email;
+        $review->user_id = Auth::user()->id;
+
+        $review->update();
+
+        $route = 'review/'.$id_review;
+       
+        return redirect($route);
+      
+    }
+
+    public function editreview($id)
+    {
+        $rev = ReviewModel::find(($id));
+
+        $subject = $rev->subject;
+        $textreview = $rev->message;
+        $user_id_review = $rev->user_id;
+
+        return view('user.editreview',compact('subject','textreview','user_id_review','id'));
+    }
+
     public function review($id)
     {
         $rev = ReviewModel::find(($id));
@@ -42,7 +80,7 @@ class UserController extends Controller
 
         }
 
-        return view('user.review',compact('subject','textreview','filePath','user_id_review'));
+        return view('user.review',compact('subject','textreview','filePath','user_id_review','id'));
      }
 
     public function create()

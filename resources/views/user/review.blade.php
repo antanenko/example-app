@@ -29,7 +29,7 @@
             <p>User id review:{{ $user_id_review }}</p>
 
             @if($user_id_review == Auth::user()->id)
-                <a href="/editreview">Edit review</a> 
+                <a href="/editreview/{{ $id }}">Edit review</a> 
             @endif
 
             

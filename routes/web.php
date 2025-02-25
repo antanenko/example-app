@@ -19,9 +19,16 @@ Route::get('send',[UserController::class, 'send'])->name('send');
 Route::get('review/{id}',[UserController::class,'review'])->name('review');
 
 
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::post('dashboard/add_review', [UserController::class,'add_review'])->name('add_review');
+
+    Route::post('editreview/{id}', [UserController::class,'editreviewUpdate'])->name('editreviewUpdate');
+
+    Route::get('editreview/{id}',[UserController::class,'editreview'])->name('editreview');
+
+    
 });
 
 Route::middleware('guest')->group(function () {
